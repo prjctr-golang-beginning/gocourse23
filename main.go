@@ -2,43 +2,46 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
+	"net/http"
+	_ "net/http/pprof"
 	"prof/pkg"
-	"sync"
 )
 
+func hiHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("hi"))
+}
+
 func main() {
-	wg := sync.WaitGroup{}
+	go simpleMap()
 
-	wg.Add(1)
-	go func() {
-		for i := 0; i < 1000; i++ {
-			res1 := map[string]any{}
-			_ = json.Unmarshal([]byte(pkg.Example), &res1)
-			fmt.Print(res1)
-		}
-		wg.Done()
-	}()
+	go simpleStruct()
 
-	wg.Add(1)
-	go func() {
-		for i := 0; i < 1000; i++ {
-			res2 := pkg.Message{}
-			_ = json.Unmarshal([]byte(pkg.Example), &res2)
-			fmt.Print(res2)
-		}
-		wg.Done()
-	}()
+	go easyJson()
 
-	wg.Add(1)
-	go func() {
-		for i := 0; i < 1000; i++ {
-			res3 := pkg.Message{}
-			_ = res3.UnmarshalJSON([]byte(pkg.Example))
-			fmt.Print(res3)
-		}
-		wg.Done()
-	}()
+	http.HandleFunc("/", hiHandler)
+	http.ListenAndServe(":8080", nil)
+}
 
-	wg.Wait()
+func simpleMap() {
+	for {
+		res1 := map[string]any{}
+		_ = json.Unmarshal([]byte(pkg.Example), &res1)
+		//fmt.Print(res1)
+	}
+}
+
+func simpleStruct() {
+	for {
+		res2 := pkg.Message{}
+		_ = json.Unmarshal([]byte(pkg.Example), &res2)
+		//fmt.Print(res2)
+	}
+}
+
+func easyJson() func() {
+	for {
+		res3 := pkg.Message{}
+		_ = res3.UnmarshalJSON([]byte(pkg.Example))
+		//fmt.Print(res3)
+	}
 }
