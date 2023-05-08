@@ -47,6 +47,12 @@ func main() {
 	fmt.Printf("5. Entity before: %v\n", entity)
 	Populate(entity)
 	fmt.Printf("5. Entity after: %v\n", entity)
+
+	// exercise:
+	// Мацаємо рефлексію.
+	// Треба написату дуже простий варіант функції Populate - MiniPopulate(entity any, args...),
+	// передати в неї сутність, яку треба заповнити, і дані, якими треба заповнити, і файтично заповнити 2 зовсім різні сутності.
+	// Нехай це буде сутність Human {name string, age float64} і сутність dog {big bool, birthday time.Time}
 }
 
 type TimeTracker int64
