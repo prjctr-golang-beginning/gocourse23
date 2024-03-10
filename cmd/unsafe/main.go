@@ -21,16 +21,18 @@ func main() {
 	fmt.Printf("Розмір структури Person: %d байтів\n", unsafe.Sizeof(Smith))
 
 	// Використання Offsetof для визначення зміщення полів від початку структури
-	fmt.Printf("Зміщення поля Maried: %d, Age: %d, BancAccountAmount: %d, Name: %d\n",
+	fmt.Printf("Зміщення поля Maried: %d, HasChildren: %d, Age: %d, BancAccountAmount: %d, Name: %d\n",
 		unsafe.Offsetof(Smith.Maried),
+		unsafe.Offsetof(Smith.HasChildren),
 		unsafe.Offsetof(Smith.Age),
 		unsafe.Offsetof(Smith.BancAccountAmount),
 		unsafe.Offsetof(Smith.Name),
 	)
 
 	// Використання Alignof для визначення вирівнювання типів даних
-	fmt.Printf("Вирівнювання Maried: %d, Age: %d, BancAccountAmount: %d, Name: %d\n",
+	fmt.Printf("Вирівнювання Maried: %d, HasChildren: %d, Age: %d, BancAccountAmount: %d, Name: %d\n",
 		unsafe.Alignof(Smith.Maried),
+		unsafe.Alignof(Smith.HasChildren),
 		unsafe.Alignof(Smith.Age),
 		unsafe.Alignof(Smith.BancAccountAmount),
 		unsafe.Alignof(Smith.Name),

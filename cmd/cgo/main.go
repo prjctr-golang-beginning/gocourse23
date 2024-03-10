@@ -24,7 +24,7 @@ func main() {
 	product := C.multiply(C.int(a), C.int(b))
 
 	fmt.Printf("Sum for %T: %d\n", sum, sum)
-	fmt.Printf("Quotient for %T: %f\n", quotient)
+	fmt.Printf("Quotient for %T: %f\n", quotient, quotient)
 	fmt.Printf("Difference: %d\n", difference)
 	fmt.Printf("Product: %d\n", product)
 
